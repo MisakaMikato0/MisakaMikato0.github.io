@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  <title>git的使用 | 御坂网络</title>
+  <meta name="author" content="Tao_Liu" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="git" />
+  
+  <meta name="description" content="git 的入门命令（CRUD）git 的步骤创建工作目录 修改工作的目录 文件git add .&#x2F;git hash-object -w 文件名（修改了多少次就执行多少次）git update-indexgit commit -m “注释内容”git write-treegit commit-treegit pull origin master 下载远程代码git merge master 合并 m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的使用">
+<meta property="og:url" content="http://example.com/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="御坂网络">
+<meta property="og:description" content="git 的入门命令（CRUD）git 的步骤创建工作目录 修改工作的目录 文件git add .&#x2F;git hash-object -w 文件名（修改了多少次就执行多少次）git update-indexgit commit -m “注释内容”git write-treegit commit-treegit pull origin master 下载远程代码git merge master 合并 m">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/favicon.ico">
+<meta property="article:published_time" content="2022-01-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-05T07:05:51.633Z">
+<meta property="article:author" content="Tao_Liu">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/favicon.ico">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-color-dark.min.css" type="text/css" media="(prefers-color-scheme: dark)">
+    <script src="/js/kr-dark.min.js"></script>
+  
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night-eighties.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  
+  
+    <link rel="stylesheet" href="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://unpkg.com/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner.webp');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://candinya.com">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth">项目链接</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/MisakaMikato0/MisakaMikato0.github.io">GitHub地址</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">御坂网络</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>御坂网络</h2> <br />
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article itemscope itemtype="https://schema.org/Article">
+    
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/">
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center" itemprop="name headline">git的使用</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><time datetime="2022-01-31T16:00:00.000Z" itemprop="datePublished"><i class="fa fa-calendar"></i> 2022-02-01</time></li>
+                <li itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <i class="fa fa-user"></i> 作者 <span itemprop="name">Tao_Liu</span>
+                </li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~4.07K
+                    
+                    字
+                </li>
+                
+                    <li id="/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/" class="leancloud_visitors" data-flag-title="git的使用">
+                        <i class="fa fa-eye"></i>
+                        <span class="leancloud-visitors-count"> </span> 次阅读
+                    </li>
+                    
+                        <li>
+                            <i class="fa fa-commenting-o"></i>
+                            <span data-xid="/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/" class="waline-comment-count"> </span> 条评论
+                        </li>
+                    
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                <div class="icon"><i class="fa fa-warning"></i></div>
+                <div class="text"><p>本文最后编辑于 <time datetime="1644044751633"></time> 前，其中的内容可能需要更新。</p></div>
+            </div>
+            
+                <div class="kratos-post-inner-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git-%E7%9A%84%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A4%EF%BC%88CRUD%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">git 的入门命令（CRUD）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">git 的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-number">1.2.</span> <span class="toc-text">创建版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%B8%B8%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">git 常用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.</span> <span class="toc-text">git 底层命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E9%AB%98%E7%BA%A7%E5%91%BD%E4%BB%A4"><span class="toc-number">1.5.</span> <span class="toc-text">git 高级命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF"><span class="toc-number">1.6.</span> <span class="toc-text">分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E6%9C%AC%E8%B4%A8"><span class="toc-number">1.7.</span> <span class="toc-text">git 分支本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E5%91%BD%E4%BB%A4"><span class="toc-number">1.8.</span> <span class="toc-text">git 分支命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E7%9A%84%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">1.9.</span> <span class="toc-text">git 分支的注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E6%82%94%E8%8D%AF"><span class="toc-number">1.10.</span> <span class="toc-text">后悔药</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reset-%E4%B8%89%E9%83%A8%E6%9B%B2"><span class="toc-number">1.11.</span> <span class="toc-text">reset 三部曲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84-reset"><span class="toc-number">1.12.</span> <span class="toc-text">路径 reset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#checkout-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="toc-number">1.13.</span> <span class="toc-text">checkout 深入理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E5%88%AB%E5%90%8D"><span class="toc-number">1.14.</span> <span class="toc-text">配别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%A4%E9%94%80"><span class="toc-number">1.15.</span> <span class="toc-text">撤销</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93-tag"><span class="toc-number">1.16.</span> <span class="toc-text">打 tag</span></a></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <div itemprop="articleBody"><h1 id="git-的入门命令（CRUD）"><a href="#git-的入门命令（CRUD）" class="headerlink" title="git 的入门命令（CRUD）"></a>git 的入门命令（CRUD）</h1><h2 id="git-的步骤"><a href="#git-的步骤" class="headerlink" title="git 的步骤"></a>git 的步骤</h2><p>创建工作目录 修改工作的目录 文件<br>git add ./<br>git hash-object -w 文件名（修改了多少次就执行多少次）<br>git update-index<br>git commit -m “注释内容”<br>git write-tree<br>git commit-tree<br>git pull origin master 下载远程代码<br>git merge master 合并 master 分支<br>git push -u origin master 上传代码</p>
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><p>git clone 克隆远程版本库</p>
+<p>git init 初始化本地版本库</p>
+<h2 id="git-常用"><a href="#git-常用" class="headerlink" title="git 常用"></a>git 常用</h2><p>git remote add origin <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a>:yeszao/dofiler.git 配置远程 git 版本库</p>
+<p>git pull origin master 下载代码及快速合并</p>
+<p>git push origin master 上传代码及快速合并</p>
+<p>git fetch origin</p>
+<p>git config –global alias.br=”branch” 创建/查看本地分支</p>
+<p>git config –global alias.co=”checkout” 切换分支</p>
+<p>git config –global alias.cb=”checkout -b” 创建并切换到新分支</p>
+<p>git config –global alias.cm=”commit -m” 提交</p>
+<p>git config –global alias.st=”status” 查看状态</p>
+<p>git config –global alias.pullm=”pull origin master” 拉取分支</p>
+<p>git config –global alias.pushm=”push origin master” 提交分支</p>
+<p>git config –global alias.log=”git log –oneline –graph –decorate –color=always” 单行、分颜色显示记录</p>
+<p>git config –global alias.logg=”git log –graph –all –format=format:’%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)’ –abbrev-commit –date=relative” 复杂显示 从远程库获取代码</p>
+<h2 id="git-底层命令"><a href="#git-底层命令" class="headerlink" title="git 底层命令"></a>git 底层命令</h2><p>git ls-files -s 查看暂存区<br>git cat-file -p 查看暂存区文件的内容</p>
+<h2 id="git-高级命令"><a href="#git-高级命令" class="headerlink" title="git 高级命令"></a>git 高级命令</h2><p>git init 初始化仓库<br>git satatus 查看文件的状态<br>git diff 查看哪些修改的文件还没暂存<br>git diff –staged 查看哪些修改被暂存 但是还没有提交的<br>git log –oneline 查看提交的历史纪录<br>git log -p 查看指定文件的提交历史<br>git blame 以列表方式查看指定文件的提交历史<br>git add 文件路径 把修改的文件暂存<br>git rm 文件名 删除文件 把修改添加到暂存区<br>git mv 原文件名 新文件名 将工作目录中的文件修改 然后添加到暂存区<br>git commit 提交<br>git commit -a 跳过 add 步骤<br>git commit -a -m 注释 将暂存区提交到版本库</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>git branch 显示分支列表<br>git branch 分支名 创建分支<br>git checkout 分支名 切换分支<br>git branch -D 分支名 强制删除分支</p>
+<h2 id="git-分支本质"><a href="#git-分支本质" class="headerlink" title="git 分支本质"></a>git 分支本质</h2><p>分支本质是一个提交对象,所有的分支都会有机会被 HEAD 所引用(HEAD 一个时刻只会指向一个分支)<br>当我们有新的提交的时候 HEAD 会携带当前持有的分支往前移动</p>
+<h2 id="git-分支命令"><a href="#git-分支命令" class="headerlink" title="git 分支命令"></a>git 分支命令</h2><pre><code>创建分支            : git branch branchname
+切换分支            : git checkout  branchname
+创建&amp;切换分支       : git checkout -b branchname
+版本穿梭(时光机)    :  git branch branchname commitHash
+普通删除分支        : git  branch -d branchname
+强制删除分支        : git  branch -D branchname
+合并分支            : git merge branchname
+    快进合并 --&gt; 不会产生冲突
+    典型合并 --&gt; 有机会产生冲突
+    解决冲突 --&gt; 打开冲突的文件 进行修改 add commit
+
+查看分支列表 : git branch
+查看合并到当前分支的分支列表: git branch --merged
+    一旦出现在这个列表中 就应该删除
+查看没有合并到当前分支的分支列表: git branch --no-merged
+    一旦出现在这个列表中 就应该观察一下是否需要合并
+</code></pre>
+<h2 id="git-分支的注意点"><a href="#git-分支的注意点" class="headerlink" title="git 分支的注意点"></a>git 分支的注意点</h2><pre><code>在切换的时候 一定要保证当前分支是干净的!!!
+    允许切换分支:
+        分支上所有的内容处于 已提交状态
+        (避免)分支上的内容是初始化创建 处于未跟踪状态
+        (避免)分支上的内容是初始化创建 第一次处于已暂存状态
+    不允许切分支:
+         分支上所有的内容处于 已修改状态  或 第二次以后的已暂存状态
+
+在分支上的工作做到一半时 如果有切换分支的需求, 我们应该将现有的工作存储起来
+    git stash : 会将当前分支上的工作推到一个栈中
+    分支切换  进行其他工作 完成其他工作后 切回原分支
+    git stash apply : 将栈顶的工作内容还原 但不让任何内容出栈
+    git stash drop  : 取出栈顶的工作内容后 就应该将其删除(出栈)
+    git stash pop   :      git stash apply +  git stash drop
+    git stash list  : 查看存储
+</code></pre>
+<h2 id="后悔药"><a href="#后悔药" class="headerlink" title="后悔药"></a>后悔药</h2><pre><code>撤销工作目录的修改   :  git checkout -- filename
+撤销暂存区的修改     :  git reset HEAD  filename
+撤销提交             :  git commit --amend
+</code></pre>
+<h2 id="reset-三部曲"><a href="#reset-三部曲" class="headerlink" title="reset 三部曲"></a>reset 三部曲</h2><pre><code>git reset --soft commithash    ---&gt; 用commithash的内容重置HEAD内容
+git reset [--mixed] commithash ---&gt; 用commithash的内容重置HEAD内容 重置暂存区
+git reset --hard commithash    ---&gt; 用commithash的内容重置HEAD内容 重置暂存区 重置工作目录
+</code></pre>
+<h2 id="路径-reset"><a href="#路径-reset" class="headerlink" title="路径 reset"></a>路径 reset</h2><pre><code>所有的路径reset都要省略第一步!!!
+    第一步是重置HEAD内容  我们知道HEAD本质指向一个分支 分支的本质是一个提交对象
+    提交对象 指向一个树对象 树对象又很有可能指向多个git对象 一个git对象代表一个文件!!!
+    HEAD可以代表一系列文件的状态!!!!
+git reset [--mixed] commithash filename
+     用commithash中filename的内容重置暂存区
+</code></pre>
+<h2 id="checkout-深入理解"><a href="#checkout-深入理解" class="headerlink" title="checkout 深入理解"></a>checkout 深入理解</h2><pre><code>git   checkout brancname  跟   git reset --hard commithash特别像
+    共同点
+        都需要重置 HEAD   暂存区   工作目录
+    区别
+         checkout对工作目录是安全的    reset --hard是强制覆盖
+         checkout动HEAD时不会带着分支走而是切换分支
+         reset --hard时是带着分支走
+
+checkout + 路径
+      git checkout commithash  filename
+           重置暂存区
+           重置工作目录
+      git checkout -- filename
+          重置工作目录
+</code></pre>
+<h2 id="配别名"><a href="#配别名" class="headerlink" title="配别名"></a>配别名</h2><p>git config –global alias. 名字 ‘要配的命令’</p>
+<h2 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h2><p>git checkout –filename 撤回自己在工作目录中的修改<br>git reset HEAD filename 撤回自己的暂存<br>git commit -amend 注释写错了重新改写提交<br>git revert 撤消指定的提交分支与标签</p>
+<h2 id="打-tag"><a href="#打-tag" class="headerlink" title="打 tag"></a>打 tag</h2><p>git tag tag 名 为最新的提交对象打 tag<br>git tag tag 名 commithash 为指定的提交对象打 tag</p>
+<p>git tag 列出 tag</p>
+<p>git tag -d tag 名 删除 tag</p>
+<p>git checkout tagname 查看某个 tag 所指向的文件版本<br>git checkout -b 分支名 为他创建一个分支</p>
+<p>git show tagname 查看指定的 tag</p>
+</div>
+        </div>
+        
+            <div class="kratos-copyright text-center clearfix">
+                <h5 itemprop="copyrightNotice">本作品采用 <a rel="license nofollow" target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+            </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/";
+            const title         = "「git的使用」";
+            const excerpt       = `git 的入门命令（CRUD）git 的步骤创建工作目录 修改工作的目录 文件git add ./git hash-object -w 文件名（修改了多少次就执行多少次）git update-indexgit commit -m “注...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/git/" rel="tag">git</a>
+                </div>
+                <div class="pull-date">
+                    <time datetime="2022-02-05T07:05:51.633Z" itemprop="dateModified">最后编辑：2022-02-05</time>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" Hello World" href="/2022/04/28/hello-world/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+        <div id="w-comments" class="post-comments bg-image"></div>
+<script>
+    var load_comm = () => {
+        const init = () => {
+            new Waline(Object.assign({
+                el: '#w-comments',
+                path: '/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/'
+            }, JSON.parse('{"serverURL":"https://hexo-7juhakynr-misakamikato0.vercel.app","visitor":true,"lang":"zh-CN","dark":"auto","login":"enable","wordLimit":0,"pageSize":10,"highlight":true,"meta":["nick","mail"],"requiredMeta":[],"placeholder":"随便说点什么喵～o(=•ェ•=)m \\n没有登录也是完全没问题的哦～","copyright":false,"emoji":["https://unpkg.com/@waline/emojis@1.0.1/alus","https://unpkg.com/@waline/emojis@1.0.1/bilibili","https://unpkg.com/@waline/emojis@1.0.1/qq","https://unpkg.com/@waline/emojis@1.0.1/tieba"]}')));
+        }
+        if (typeof Waline === 'undefined') {
+            const src = 'https://unpkg.com/@waline/client@1/dist/Waline.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://waline.js.org/">comments powered by Waline.</a></noscript>
+
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar.webp" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center"></p>
+    </div>
+    <div class="site-meta">
+        <a class="meta-item" href="/archives/">
+            <span class="title">
+                文章
+            </span>
+            <span class="count">
+                4
+            </span>
+        </a>
+        <a class="meta-item" href="/categories/">
+            <span class="title">
+                分类
+            </span>
+            <span class="count">
+                1
+            </span>
+        </a>
+        <a class="meta-item" href="/tags/">
+            <span class="title">
+                标签
+            </span>
+            <span class="count">
+                3
+            </span>
+        </a>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar" role="progressbar" aria-label="阅读进度："></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#git-%E7%9A%84%E5%85%A5%E9%97%A8%E5%91%BD%E4%BB%A4%EF%BC%88CRUD%EF%BC%89"><span class="toc-text">git 的入门命令（CRUD）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">git 的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">创建版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%B8%B8%E7%94%A8"><span class="toc-text">git 常用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%BA%95%E5%B1%82%E5%91%BD%E4%BB%A4"><span class="toc-text">git 底层命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E9%AB%98%E7%BA%A7%E5%91%BD%E4%BB%A4"><span class="toc-text">git 高级命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF"><span class="toc-text">分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E6%9C%AC%E8%B4%A8"><span class="toc-text">git 分支本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">git 分支命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%88%86%E6%94%AF%E7%9A%84%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-text">git 分支的注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E6%82%94%E8%8D%AF"><span class="toc-text">后悔药</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reset-%E4%B8%89%E9%83%A8%E6%9B%B2"><span class="toc-text">reset 三部曲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84-reset"><span class="toc-text">路径 reset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#checkout-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="toc-text">checkout 深入理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E5%88%AB%E5%90%8D"><span class="toc-text">配别名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%92%A4%E9%94%80"><span class="toc-text">撤销</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93-tag"><span class="toc-text">打 tag</span></a></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/command/">command</a><span class="category-list-count">2</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/Taro/" style="font-size: 0.6em;">Taro</a> <a href="/tags/git/" style="font-size: 0.6em;">git</a> <a href="/tags/problem/" style="font-size: 0.6em;">problem</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/2022/06/06/Taro%E4%B8%ADVideo%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa  fa-book"></i> Taro中Video的使用</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/05/07/problem/"><i class="fa  fa-book"></i> problem</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/04/28/hello-world/"><i class="fa  fa-book"></i> Hello World</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2022/02/01/git%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fa  fa-book"></i> git的使用</a>
+            
+          
+        
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  class="ap-lrc"  >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://t.me/CandyUnion"><i class="fa fa-telegram"></i></a></li>
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://nya.one/@Candinya"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/Candinya"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2022 御坂网络 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Site built with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by Tao_Liu.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://unpkg.com/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+    <script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    
+    <script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="3204190542"
+        order="random"
+        fixed="true"
+    >
+    </meting-js>
+
+
+
+    <script defer src="https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://unpkg.com/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
